@@ -1,0 +1,468 @@
+{
+  "enums": {
+    "backend/app/Application/DTOs/AuditoriaDTO.php::ACCIONES": [
+      "crear_evaluacion",
+      "consultar_resolucion",
+      "exportar_auditoria",
+      "consultar_estadisticas"
+    ],
+    "backend/app/Domain/Entities/Auditoria.php::ACCIONES": [
+      "crear_evaluacion",
+      "consultar_resolucion",
+      "exportar_auditoria",
+      "consultar_estadisticas"
+    ],
+    "backend/app/Domain/Entities/Enums/EstadoCriterio.php::EstadoCriterio": [
+      "pass",
+      "fail",
+      "na"
+    ],
+    "backend/app/Domain/Entities/Enums/Resultado.php::Resultado": [
+      "elegible",
+      "no_elegible",
+      "revision"
+    ],
+    "backend/app/Domain/Entities/Enums/Rol.php::Rol": [
+      "investigador",
+      "gestor"
+    ],
+    "backend/app/Domain/Entities/Enums/TipoCriterio.php::TipoCriterio": [
+      "inclusion",
+      "exclusion"
+    ],
+    "backend/app/Domain/Services/EvaluadorCriterio.php::CODIGO_*": [
+      "CRIT_EDAD_MIN",
+      "CRIT_PSORIASIS_CRONICA",
+      "CRIT_PASI_MIN",
+      "CRIT_BSA_MIN",
+      "CRIT_TB_HISTORIAL",
+      "CRIT_EMBARAZO",
+      "CRIT_BIOLOGICOS_90D",
+      "CRIT_CORTICOIDES_14D"
+    ],
+    "backend/app/Domain/Services/MotorElegibilidad.php::ORDEN_CRITERIOS": [
+      "CRIT_EDAD_MIN",
+      "CRIT_PSORIASIS_CRONICA",
+      "CRIT_PASI_MIN",
+      "CRIT_BSA_MIN",
+      "CRIT_TB_HISTORIAL",
+      "CRIT_EMBARAZO",
+      "CRIT_BIOLOGICOS_90D",
+      "CRIT_CORTICOIDES_14D"
+    ],
+    "backend/app/Infrastructure/Auth/CognitoJWTDecoder.php::TIPOS_TOKEN": [
+      "id",
+      "access"
+    ],
+    "backend/app/Infrastructure/Auth/CognitoUserProvider.php::CLAIMS_CORREO": [
+      "email",
+      "cognito:username",
+      "preferred_username"
+    ],
+    "backend/database/seeders/PerfilSinteticoSeeder.php::ACCION_CREAR_EVALUACION": [
+      "crear_evaluacion"
+    ],
+    "backend/database/seeders/PerfilSinteticoSeeder.php::ESTADO_CRITERIO": [
+      "pass",
+      "fail",
+      "na"
+    ],
+    "backend/database/seeders/PerfilSinteticoSeeder.php::RESULTADO": [
+      "elegible",
+      "no_elegible"
+    ],
+    "backend/database/seeders/ReglaCriterioSeeder.php::CODIGO_*": [
+      "CRIT_EDAD_MIN",
+      "CRIT_PSORIASIS_CRONICA",
+      "CRIT_PASI_MIN",
+      "CRIT_BSA_MIN",
+      "CRIT_TB_HISTORIAL",
+      "CRIT_EMBARAZO",
+      "CRIT_BIOLOGICOS_90D",
+      "CRIT_CORTICOIDES_14D"
+    ],
+    "backend/database/seeders/ReglaCriterioSeeder.php::TIPO_*": [
+      "inclusion",
+      "exclusion"
+    ],
+    "frontend/src/styles/tokens.ts::tokens": [
+      "colors",
+      "typography",
+      "spacing",
+      "radii",
+      "shadows",
+      "icon_image_style",
+      "motion",
+      "breakpoints"
+    ],
+    "frontend/src/types/dto.ts::AuditoriaDTO.accion": [
+      "crear_evaluacion",
+      "consultar_resolucion",
+      "exportar_auditoria",
+      "consultar_estadisticas"
+    ],
+    "frontend/src/types/dto.ts::EvaluacionCriterioDTO.estado": [
+      "pass",
+      "fail",
+      "na"
+    ],
+    "frontend/src/types/dto.ts::FiltrosAuditoria.estado": [
+      "elegible",
+      "no_elegible",
+      "revision",
+      "pendiente"
+    ],
+    "frontend/src/types/dto.ts::ReglaCriterioDTO.tipo": [
+      "inclusion",
+      "exclusion"
+    ],
+    "frontend/src/types/dto.ts::ResultadoEvaluacionDTO.resultado": [
+      "elegible",
+      "no_elegible",
+      "revision"
+    ],
+    "frontend/src/types/dto.ts::UsuarioDTO.rol": [
+      "investigador",
+      "gestor"
+    ]
+  },
+  "exports": {
+    "backend/app/Application/DTOs/AuditoriaDTO.php": [
+      "ACCIONES",
+      "id",
+      "usuario_id",
+      "evaluacion_id",
+      "accion",
+      "timestamp",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/CrearEvaluacionRequest.php": [
+      "paciente",
+      "evaluacion",
+      "fromArray",
+      "toArray",
+      "numeroHistoriaClinica",
+      "fechaNacimiento",
+      "genero",
+      "ciudad",
+      "edad",
+      "psoriasisMeses",
+      "pasi",
+      "bsa",
+      "historialTb",
+      "embarazo",
+      "usoBiologicosMeses",
+      "usoCorticoidesTopicosDias"
+    ],
+    "backend/app/Application/DTOs/EstadisticasReclutamientoDTO.php": [
+      "total_evaluaciones",
+      "elegibles",
+      "no_elegibles",
+      "revision",
+      "tasa_elegibilidad",
+      "distribucion_motivos_exclusion",
+      "serie_temporal",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/EvaluacionCriterioDTO.php": [
+      "id",
+      "evaluacion_id",
+      "criterio_id",
+      "estado",
+      "motivo",
+      "codigo",
+      "nombre",
+      "tipo",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/EvaluacionDTO.php": [
+      "id",
+      "paciente_id",
+      "usuario_id",
+      "edad",
+      "psoriasis_meses",
+      "pasi",
+      "bsa",
+      "historial_tb",
+      "embarazo",
+      "uso_biologicos_meses",
+      "uso_corticoides_topicos_dias",
+      "evaluada_en",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/EvaluacionResolutionResponse.php": [
+      "evaluacion",
+      "paciente",
+      "resultado",
+      "criterios",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/PacienteDTO.php": [
+      "id",
+      "numero_historia_clinica",
+      "fecha_nacimiento",
+      "genero",
+      "ciudad",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/ReglaCriterioDTO.php": [
+      "id",
+      "codigo",
+      "nombre",
+      "tipo",
+      "descripcion",
+      "activo",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/ResultadoEvaluacionDTO.php": [
+      "id",
+      "evaluacion_id",
+      "resultado",
+      "detalle_trazabilidad",
+      "creada_en",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Application/DTOs/UsuarioDTO.php": [
+      "id",
+      "email",
+      "nombre",
+      "rol",
+      "fromArray",
+      "toArray"
+    ],
+    "backend/app/Domain/Entities/Enums/EstadoCriterio.php": [
+      "PASS",
+      "FAIL",
+      "NA",
+      "etiqueta",
+      "esCumplido",
+      "incumple",
+      "aplica"
+    ],
+    "backend/app/Domain/Entities/Enums/Resultado.php": [
+      "ELEGIBLE",
+      "NO_ELEGIBLE",
+      "REVISION",
+      "etiqueta",
+      "esElegible",
+      "esNoElegible",
+      "requiereRevision"
+    ],
+    "backend/app/Domain/Entities/Enums/Rol.php": [
+      "INVESTIGADOR",
+      "GESTOR",
+      "etiqueta",
+      "esInvestigador",
+      "esGestor"
+    ],
+    "backend/app/Domain/Entities/Enums/TipoCriterio.php": [
+      "INCLUSION",
+      "EXCLUSION",
+      "etiqueta",
+      "esInclusion",
+      "esExclusion"
+    ],
+    "backend/app/Infrastructure/AWS/AppConfigClient.php": [
+      "getConfiguration",
+      "getParameter",
+      "refresh"
+    ],
+    "backend/app/Infrastructure/AWS/CloudWatchLogger.php": [
+      "write"
+    ],
+    "backend/app/Infrastructure/AWS/SecretsManagerClient.php": [
+      "getSecret",
+      "getSecretValue",
+      "resolveDatabaseCredentials",
+      "resolveApplicationKey"
+    ],
+    "backend/app/Infrastructure/Auth/CognitoJWTDecoder.php": [
+      "decode"
+    ],
+    "backend/app/Infrastructure/Auth/CognitoUserProvider.php": [
+      "retrieveById",
+      "retrieveByToken",
+      "updateRememberToken",
+      "retrieveByCredentials",
+      "validateCredentials",
+      "resolverPorClaims"
+    ],
+    "backend/app/Infrastructure/Auth/PassportCognitoGuard.php": [
+      "resolve",
+      "user",
+      "id",
+      "claims"
+    ],
+    "backend/artisan": [],
+    "backend/bootstrap/app.php": [],
+    "backend/bootstrap/providers.php": [],
+    "backend/composer.json": [],
+    "backend/config/app.php": [
+      "name",
+      "env",
+      "debug",
+      "url",
+      "timezone",
+      "locale",
+      "fallback_locale",
+      "faker_locale",
+      "cipher",
+      "key",
+      "previous_keys",
+      "maintenance"
+    ],
+    "backend/config/appconfig.php": [
+      "enabled",
+      "region",
+      "application",
+      "environment",
+      "configuration_profile",
+      "poll_interval",
+      "deployment_strategy",
+      "parameters"
+    ],
+    "backend/config/auth.php": [
+      "defaults",
+      "guards",
+      "providers",
+      "passwords",
+      "password_timeout"
+    ],
+    "backend/config/cache.php": [
+      "default",
+      "stores",
+      "prefix"
+    ],
+    "backend/config/cors.php": [
+      "paths",
+      "allowed_methods",
+      "allowed_origins",
+      "allowed_origins_patterns",
+      "allowed_headers",
+      "exposed_headers",
+      "max_age",
+      "supports_credentials"
+    ],
+    "backend/config/database.php": [
+      "default",
+      "connections",
+      "migrations",
+      "redis"
+    ],
+    "backend/config/logging.php": [
+      "default",
+      "deprecations",
+      "channels",
+      "cloudwatch"
+    ],
+    "backend/config/passport.php": [
+      "guard",
+      "private_key",
+      "public_key",
+      "connection",
+      "client_uuids",
+      "personal_access_client"
+    ],
+    "backend/config/secrets.php": [
+      "enabled",
+      "region",
+      "secret_id",
+      "version_stage",
+      "cache_ttl",
+      "endpoint",
+      "database",
+      "application"
+    ],
+    "backend/config/session.php": [
+      "driver",
+      "lifetime",
+      "expire_on_close",
+      "encrypt",
+      "files",
+      "connection",
+      "table",
+      "store",
+      "lottery",
+      "cookie",
+      "path",
+      "domain",
+      "secure",
+      "http_only",
+      "same_site",
+      "partitioned"
+    ],
+    "backend/database/migrations/2026_01_01_000001_create_paciente_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000002_create_usuario_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000003_create_evaluacion_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000004_create_resultado_evaluacion_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000005_create_regla_criterio_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000006_create_evaluacion_criterio_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/migrations/2026_01_01_000007_create_auditoria_table.php": [
+      "up",
+      "down"
+    ],
+    "backend/database/seeders/DatabaseSeeder.php": [
+      "run",
+      "uuidV7"
+    ],
+    "backend/database/seeders/PerfilSinteticoSeeder.php": [
+      "run"
+    ],
+    "backend/database/seeders/ReglaCriterioSeeder.php": [
+      "run",
+      "CODIGO_EDAD_MIN",
+      "CODIGO_PSORIASIS_CRONICA",
+      "CODIGO_PASI_MIN",
+      "CODIGO_BSA_MIN",
+      "CODIGO_TB_HISTORIAL",
+      "CODIGO_EMBARAZO",
+      "CODIGO_BIOLOGICOS_90D",
+      "CODIGO_CORTICOIDES_14D",
+      "TIPO_INCLUSION",
+      "TIPO_EXCLUSION"
+    ],
+    "frontend/src/styles/tokens.ts": [
+      "tokens"
+    ],
+    "frontend/src/types/dto.ts": [
+      "PacienteDTO",
+      "EvaluacionDTO",
+      "ResultadoEvaluacionDTO",
+      "ReglaCriterioDTO",
+      "EvaluacionCriterioDTO",
+      "UsuarioDTO",
+      "AuditoriaDTO",
+      "CrearEvaluacionRequest",
+      "EvaluacionCriterioDTODetalle",
+      "EvaluacionResolutionResponse",
+      "EstadisticasReclutamientoDTO",
+      "FiltrosAuditoria"
+    ]
+  }
+}

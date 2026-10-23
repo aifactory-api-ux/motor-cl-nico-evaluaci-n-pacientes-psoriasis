@@ -1,0 +1,30 @@
+{
+    "name": "motor-preseleccion-clinica-etapa-po",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Frontend React 18 + TypeScript 5 del Motor de Pre-selección Clínica Etapa PO (protocolo ALM-PSO-2026).",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc --noEmit && vite build",
+        "preview": "vite preview",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@aws-amplify/auth": "^6.21.2",
+        "aws-amplify": "^6.22.2",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.30.6"
+    },
+    "devDependencies": {
+        "@types/react": "^18.3.31",
+        "@types/react-dom": "^18.3.7",
+        "@vitejs/plugin-react": "^4.7.0",
+        "typescript": "^5.9.3",
+        "vite": "^5.4.21"
+    },
+    "engines": {
+        "node": ">=20"
+    }
+}

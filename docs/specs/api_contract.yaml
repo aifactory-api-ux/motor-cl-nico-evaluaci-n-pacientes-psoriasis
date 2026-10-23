@@ -1,0 +1,451 @@
+openapi: 3.1.0
+info:
+  title: Motor de Pre-selección Clínica Etapa PO
+  version: '1.0.0'
+paths:
+  /api/v1/health:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - ok
+  /api/v1/evaluaciones:
+    post:
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrearEvaluacionRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluacionResolutionResponse'
+    get:
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EvaluacionDTO'
+  /api/v1/evaluaciones/{evaluacionId}:
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: evaluacionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluacionResolutionResponse'
+  /api/v1/evaluaciones/{evaluacionId}/export:
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: evaluacionId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluacionResolutionResponse'
+  /api/v1/evaluaciones/{id}/export:
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluacionResolutionResponse'
+  /api/v1/criterios:
+    get:
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReglaCriterioDTO'
+  /api/v1/auditoria:
+    get:
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditoriaDTO'
+  /api/v1/estadisticas/reclutamiento:
+    get:
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - total_evaluaciones
+                  - elegibles
+                  - no_elegibles
+                  - revision
+                properties:
+                  total_evaluaciones:
+                    type: integer
+                  elegibles:
+                    type: integer
+                  no_elegibles:
+                    type: integer
+                  revision:
+                    type: integer
+  /api/v1/auditoria/export.csv:
+    get:
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            text/csv:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    PacienteDTO:
+      type: object
+      required:
+        - id
+        - numero_historia_clinica
+        - fecha_nacimiento
+        - genero
+        - ciudad
+      properties:
+        id:
+          type: string
+          format: uuid
+        numero_historia_clinica:
+          type: string
+        fecha_nacimiento:
+          type: string
+          format: date
+        genero:
+          type: string
+        ciudad:
+          type: string
+    EvaluacionDTO:
+      type: object
+      required:
+        - id
+        - paciente_id
+        - usuario_id
+        - edad
+        - psoriasis_meses
+        - pasi
+        - bsa
+        - historial_tb
+        - embarazo
+        - uso_biologicos_meses
+        - uso_corticoides_topicos_dias
+        - evaluada_en
+      properties:
+        id:
+          type: string
+          format: uuid
+        paciente_id:
+          type: string
+          format: uuid
+        usuario_id:
+          type: string
+          format: uuid
+        edad:
+          type: integer
+        psoriasis_meses:
+          type: integer
+        pasi:
+          type: number
+          format: float
+        bsa:
+          type: number
+          format: float
+        historial_tb:
+          type: boolean
+        embarazo:
+          type: boolean
+        uso_biologicos_meses:
+          type: integer
+        uso_corticoides_topicos_dias:
+          type: integer
+        evaluada_en:
+          type: string
+          format: date-time
+    ResultadoEvaluacionDTO:
+      type: object
+      required:
+        - id
+        - evaluacion_id
+        - resultado
+        - detalle_trazabilidad
+        - creada_en
+      properties:
+        id:
+          type: string
+          format: uuid
+        evaluacion_id:
+          type: string
+          format: uuid
+        resultado:
+          type: string
+          enum:
+            - elegible
+            - no_elegible
+            - revision
+        detalle_trazabilidad:
+          type: string
+        creada_en:
+          type: string
+          format: date-time
+    ReglaCriterioDTO:
+      type: object
+      required:
+        - id
+        - codigo
+        - nombre
+        - tipo
+        - descripcion
+        - activo
+      properties:
+        id:
+          type: string
+          format: uuid
+        codigo:
+          type: string
+        nombre:
+          type: string
+        tipo:
+          type: string
+          enum:
+            - inclusion
+            - exclusion
+        descripcion:
+          type: string
+        activo:
+          type: boolean
+    EvaluacionCriterioDTO:
+      type: object
+      required:
+        - id
+        - evaluacion_id
+        - criterio_id
+        - estado
+      properties:
+        id:
+          type: string
+          format: uuid
+        evaluacion_id:
+          type: string
+          format: uuid
+        criterio_id:
+          type: string
+          format: uuid
+        estado:
+          type: string
+          enum:
+            - pass
+            - fail
+            - na
+        motivo:
+          type:
+            - string
+            - 'null'
+    EvaluacionCriterioDTODetalle:
+      allOf:
+        - $ref: '#/components/schemas/EvaluacionCriterioDTO'
+        - type: object
+          required:
+            - codigo
+            - nombre
+          properties:
+            codigo:
+              type: string
+            nombre:
+              type: string
+    UsuarioDTO:
+      type: object
+      required:
+        - id
+        - email
+        - nombre
+        - rol
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        nombre:
+          type: string
+        rol:
+          type: string
+          enum:
+            - investigador
+            - gestor
+    AuditoriaDTO:
+      type: object
+      required:
+        - id
+        - usuario_id
+        - evaluacion_id
+        - accion
+        - timestamp
+      properties:
+        id:
+          type: string
+          format: uuid
+        usuario_id:
+          type: string
+          format: uuid
+        evaluacion_id:
+          type: string
+          format: uuid
+        accion:
+          type: string
+          enum:
+            - crear_evaluacion
+            - consultar_resolucion
+            - exportar_auditoria
+            - consultar_estadisticas
+        timestamp:
+          type: string
+          format: date-time
+    CrearEvaluacionRequest:
+      type: object
+      required:
+        - paciente
+        - evaluacion
+      properties:
+        paciente:
+          type: object
+          required:
+            - numero_historia_clinica
+            - fecha_nacimiento
+            - genero
+            - ciudad
+          properties:
+            numero_historia_clinica:
+              type: string
+            fecha_nacimiento:
+              type: string
+              format: date
+            genero:
+              type: string
+            ciudad:
+              type: string
+        evaluacion:
+          type: object
+          required:
+            - edad
+            - psoriasis_meses
+            - pasi
+            - bsa
+            - historial_tb
+            - embarazo
+            - uso_biologicos_meses
+            - uso_corticoides_topicos_dias
+          properties:
+            edad:
+              type: integer
+            psoriasis_meses:
+              type: integer
+            pasi:
+              type: number
+              format: float
+            bsa:
+              type: number
+              format: float
+            historial_tb:
+              type: boolean
+            embarazo:
+              type: boolean
+            uso_biologicos_meses:
+              type: integer
+            uso_corticoides_topicos_dias:
+              type: integer
+    EvaluacionResolutionResponse:
+      type: object
+      required:
+        - evaluacion
+        - paciente
+        - resultado
+        - criterios
+      properties:
+        evaluacion:
+          $ref: '#/components/schemas/EvaluacionDTO'
+        paciente:
+          $ref: '#/components/schemas/PacienteDTO'
+        resultado:
+          $ref: '#/components/schemas/ResultadoEvaluacionDTO'
+        criterios:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluacionCriterioDTODetalle'
